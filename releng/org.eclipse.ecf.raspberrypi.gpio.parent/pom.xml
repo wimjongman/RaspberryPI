@@ -123,6 +123,7 @@
 		<module>../../test/bundles/org.eclipse.ecf.raspberrypi.gpio.pin0</module>
 		<module>../../test/bundles/org.eclipse.ecf.raspberrypi.gpio.pin1</module>
 		<module>../../test/bundles/org.eclipse.ecf.raspberrypi.gpio.MCP3008</module>
+		<module>../../test/bundles/org.eclipse.ecf.raspberrypi.gpio.pinmanager</module>
 		<module>../../bundles/org.eclipse.ecf.raspberrypi.gpio</module>
 		<module>../../bundles/org.eclipse.ecf.raspberrypi.gpio.pi4j</module>
 		<module>../../bundles/org.eclipse.ecf.raspberrypi.gpio.pi4j.adc</module>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.ecf.raspberrypi.gpio.feature"
-      label="ECF GPIO Feature"
+      label="ECF GPIO Model Feature"
       version="1.0.0.qualifier"
       provider-name="Eclipse.org - ECF">
 
@@ -19,6 +19,13 @@
 
    <plugin
          id="org.eclipse.ecf.raspberrypi.gpio"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ecf.raspberrypi.gpio.pi4j.adc"
          download-size="0"
          install-size="0"
          version="0.0.0"
