@@ -35,6 +35,26 @@ public interface IGPIOPin {
 	public static final int PIN_18 = 18;
 	public static final int PIN_19 = 19;
 	public static final int PIN_20 = 20;
+	public static final int PIN_21 = 21;
+	public static final int PIN_22 = 22;
+	public static final int PIN_23 = 23;
+	public static final int PIN_24 = 24;
+	public static final int PIN_25 = 25;
+	public static final int PIN_26 = 26;
+	public static final int PIN_27 = 27;
+	public static final int PIN_28 = 28;
+	public static final int PIN_29 = 29;
+	public static final int PIN_30 = 30;
+	public static final int PIN_31 = 31;
+	public static final int PIN_32 = 32;
+	public static final int PIN_33 = 33;
+	public static final int PIN_34 = 34;
+	public static final int PIN_35 = 35;
+	public static final int PIN_36 = 36;
+	public static final int PIN_37 = 37;
+	public static final int PIN_38 = 38;
+	public static final int PIN_39 = 39;
+	public static final int PIN_40 = 40;
 	
 	public static final int DEFAULT_OUTPUT_PIN = PIN_00;
 	public static final int DEFAULT_INPUT_PIN = PIN_02;
