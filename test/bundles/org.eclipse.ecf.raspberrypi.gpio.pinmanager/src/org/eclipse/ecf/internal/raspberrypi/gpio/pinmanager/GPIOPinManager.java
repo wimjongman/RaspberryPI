@@ -1,6 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Remain BV and others. All rights reserved. This
+ * program and the accompanying materials are made available under the terms of
+ * the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: Wim Jongman - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.ecf.internal.raspberrypi.gpio.pinmanager;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.ecf.raspberrypi.gpio.IGPIOPinManager;
 import org.eclipse.ecf.raspberrypi.gpio.IGPIOPinOutput;
@@ -76,6 +89,7 @@ public class GPIOPinManager implements IGPIOPinManager {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	protected ServiceRegistration<IGPIOPinManager> register() {
 		ServiceFactory<IGPIOPinManager> serviceFactory = new ServiceFactory<IGPIOPinManager>() {
 			@Override
@@ -89,15 +103,14 @@ public class GPIOPinManager implements IGPIOPinManager {
 					ServiceRegistration<IGPIOPinManager> registration,
 					IGPIOPinManager service) {
 				GPIOPinManager.this.dispose();
-				// e.printStackTrace();
 			}
 		};
 
 		return fContext.registerService(IGPIOPinManager.class, serviceFactory,
-				null);
+				(Dictionary<String, Object>) getProperties());
 	}
 
-	protected void dispose() {
+	public void dispose() {
 		for (AbstractPinController controller : fOutputPins.values()) {
 			try {
 				controller.dispose();
@@ -112,6 +125,41 @@ public class GPIOPinManager implements IGPIOPinManager {
 		fTracker = new ServiceTracker<IGPIOPinOutput, IGPIOPinOutput>(fContext,
 				IGPIOPinOutput.class, new TrackerCustomizer());
 		fTracker.open();
+	}
+
+	/**
+	 * Sets the default remote service properties. Override this method if you
+	 * want to add additional properties like so:
+	 * 
+	 * <pre>
+	 * protected Map&lt;String, Object&gt; getDefaultPinProps() {
+	 * 	Map&lt;String, Object&gt; pinProps = super.getDefaultPinProps();
+	 * 	pinProps.put(&quot;my.property&quot;, &quot;my.value&quot;);
+	 * }
+	 * </pre>
+	 * 
+	 * @return the properties.
+	 */
+	public Map<String, Object> getProperties() {
+		// Setup properties for export using the ecf generic server
+		Map<String, Object> pinProps = new HashMap<String, Object>();
+		pinProps.put("service.exported.interfaces", "*");
+		pinProps.put("service.exported.configs", "ecf.generic.server");
+		pinProps.put("ecf.generic.server.port", "3288");
+		try {
+			pinProps.put("ecf.generic.server.hostname", InetAddress
+					.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		pinProps.put("ecf.exported.async.interfaces", "*");
+		Properties systemProps = System.getProperties();
+		for (Object pn : systemProps.keySet()) {
+			String propName = (String) pn;
+			if (propName.startsWith("service.") || propName.startsWith("ecf."))
+				pinProps.put(propName, systemProps.get(propName));
+		}
+		return pinProps;
 	}
 
 	private final class TrackerCustomizer implements

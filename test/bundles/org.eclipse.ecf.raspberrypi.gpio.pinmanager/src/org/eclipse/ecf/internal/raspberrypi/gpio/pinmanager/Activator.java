@@ -8,24 +8,21 @@
  ******************************************************************************/
 package org.eclipse.ecf.internal.raspberrypi.gpio.pinmanager;
 
-import org.eclipse.ecf.raspberrypi.gpio.pi4j.AbstractPinController;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends AbstractPinController implements BundleActivator {
+public class Activator implements BundleActivator {
+
+	private GPIOPinManager fPinManager;
 
 	@Override
 	public void start(BundleContext pBundleContext) throws Exception {
-		((AbstractPinController) this).setup(pBundleContext);
+		fPinManager = new GPIOPinManager(pBundleContext);
 	}
 
 	@Override
 	public void stop(BundleContext pBundleContext) throws Exception {
-		((AbstractPinController) this).dispose();
+		fPinManager.dispose();
 	}
 
-	@Override
-	public int getPinNumber() {
-		return 0;
-	}
 }
