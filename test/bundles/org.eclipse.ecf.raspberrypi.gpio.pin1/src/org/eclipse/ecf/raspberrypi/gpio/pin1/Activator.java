@@ -9,20 +9,20 @@
  ******************************************************************************/
 package org.eclipse.ecf.raspberrypi.gpio.pin1;
 
-import org.eclipse.ecf.raspberrypi.gpio.pi4j.AbstractPinManager;
+import org.eclipse.ecf.raspberrypi.gpio.pi4j.AbstractPinController;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends AbstractPinManager implements BundleActivator {
+public class Activator extends AbstractPinController implements BundleActivator {
 
 	@Override
 	public void start(BundleContext pBundleContext) throws Exception {
-		((AbstractPinManager) this).setup(pBundleContext);
+		((AbstractPinController) this).setup(pBundleContext);
 	}
 
 	@Override
 	public void stop(BundleContext pBundleContext) throws Exception {
-		((AbstractPinManager) this).dispose();
+		((AbstractPinController) this).dispose();
 	}
 
 	@Override

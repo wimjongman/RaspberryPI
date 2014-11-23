@@ -23,11 +23,11 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
- * The AbstractPinManager handles the registration and un-registration of a pin
+ * The AbstractPinController handles the registration and un-registration of a pin
  * service.
  *
  */
-public abstract class AbstractPinManager {
+public abstract class AbstractPinController {
 
 	private ServiceTracker<IGPIOPinOutput, IGPIOPinOutput> fPinTracker;
 	private ServiceRegistration<IGPIOPinOutput> fPinReg;
